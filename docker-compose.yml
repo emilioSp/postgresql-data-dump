@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=emiliosp
+      - POSTGRES_PASSWORD=emiliosp
+      - POSTGRES_DB=measurements
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/data.sql
+    command: >
+      -c ssl=on
+      -c ssl_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+      -c ssl_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
